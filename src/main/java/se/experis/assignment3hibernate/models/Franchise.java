@@ -14,8 +14,7 @@ public class Franchise {
     @Column(name="description")
     private String description;
 
-    @OneToMany
-    @JoinColumn(name="movie_id")
+    @OneToMany(mappedBy = "franchise")
     List<Movie> movies;
 
     public Long getId() {
@@ -40,5 +39,13 @@ public class Franchise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 }

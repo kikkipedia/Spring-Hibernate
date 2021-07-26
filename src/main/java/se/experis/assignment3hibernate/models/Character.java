@@ -18,9 +18,13 @@ public class Character {
     @Column(name="picture_url")
     private String pictureURL;
 
-    @OneToMany
-    @JoinColumn(name= "movie_id")
-    List<Movie> movies;
+    @ManyToMany
+    @JoinTable(
+            name = "character_movie",
+            joinColumns = {@JoinColumn(name="character_id")},
+            inverseJoinColumns = {@JoinColumn(name="movie_id")}
+    )
+    public List<Movie> movies;
 
     public void setId(Long id) {
         this.id = id;

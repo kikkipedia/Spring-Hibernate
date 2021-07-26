@@ -22,13 +22,12 @@ public class Movie {
     @Column(name="trailer_url")
     private String trailerURL;
 
-    @OneToMany
-    @JoinColumn(name="character_id")
-    List<Character> characters;
+    @ManyToMany(mappedBy = "movies")
+    public List<Character> characters;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="franchise_id")
-    private Franchise franchise;
+    public Franchise franchise;
 
     public Long getId() {
         return id;
