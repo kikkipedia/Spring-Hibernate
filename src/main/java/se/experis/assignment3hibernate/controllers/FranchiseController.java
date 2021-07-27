@@ -74,4 +74,10 @@ public class FranchiseController {
         return new ResponseEntity<>(status);
     }
 
+    @GetMapping("/{id}/allMovies")
+    public ResponseEntity<Franchise> getAllMoviesInFranchise(@PathVariable Long id) {
+        HttpStatus status;
+        return
+    }
+
 }

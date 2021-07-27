@@ -25,8 +25,15 @@ public class Movie {
     @Column(name="trailer_url")
     private String trailerURL;
 
-    @ManyToMany(mappedBy = "movies")
+
+    @ManyToMany
+    @JoinTable(
+            name = "character_movie",
+            joinColumns = {@JoinColumn(name="movie_id")},
+            inverseJoinColumns = {@JoinColumn(name="character_id")}
+    )
     public List<Character> characters;
+
 
     @JsonGetter("movies")
     public List<String> characters() {
@@ -98,5 +105,21 @@ public class Movie {
 
     public void setTrailerURL(String trailerURL) {
         this.trailerURL = trailerURL;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
     }
 }
