@@ -51,7 +51,7 @@ public class MovieController {
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         HttpStatus status;
         Movie returnMovie = new Movie();
-        if(!Objects.equals(id, movie.getId())){
+        if(!id.equals(movie.getId())){
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnMovie, status);
         }

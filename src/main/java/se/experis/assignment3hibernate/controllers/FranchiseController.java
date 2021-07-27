@@ -8,7 +8,6 @@ import se.experis.assignment3hibernate.models.Franchise;
 import se.experis.assignment3hibernate.repositories.FranchiseRepository;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -51,7 +50,7 @@ public class FranchiseController {
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         HttpStatus status;
         Franchise returnFranchise = new Franchise();
-        if(!Objects.equals(id, franchise.getId())){
+        if(!id.equals(franchise.getId())){
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnFranchise, status);
         }

@@ -8,7 +8,6 @@ import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.repositories.CharacterRepository;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -51,7 +50,9 @@ public class CharacterController {
     public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character) {
         HttpStatus status;
         Character returnCharacter = new Character();
-        if(!Objects.equals(id, character.getId())){
+        character.setId(id); // We have to
+
+        if(!id.equals(character.getId())){
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnCharacter, status);
         }
