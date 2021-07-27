@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Franchise;
+import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.FranchiseRepository;
+import se.experis.assignment3hibernate.services.FranchiseService;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class FranchiseController {
 
     @Autowired
     private FranchiseRepository franchiseRepository;
+
+    @Autowired
+    private FranchiseService franchiseService;
 
     @GetMapping
     public ResponseEntity<List<Franchise>> getAllFranchises() {
@@ -75,9 +80,29 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}/allMovies")
-    public ResponseEntity<Franchise> getAllMoviesInFranchise(@PathVariable Long id) {
+    public ResponseEntity<List<Movie>> getAllMoviesInFranchise(@PathVariable Long id) {
         HttpStatus status;
-        return
+        List<Movie> movies = null;
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            movies = franchiseService.getAllMoviesInFranchise(id);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(movies, status);
+    }
+
+    @GetMapping("/{id}/allCharacters")
+    public ResponseEntity<List<Character>> getAllCharactersInFranchise(@PathVariable Long id) {
+        HttpStatus status;
+        List<Character> characters = null;
+        if (franchiseRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            characters = franchiseService.getAllCharactersInFranchise(id);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(characters, status);
     }
 
 }

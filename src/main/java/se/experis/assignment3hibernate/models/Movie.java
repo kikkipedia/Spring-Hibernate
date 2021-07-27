@@ -35,7 +35,7 @@ public class Movie {
     public List<Character> characters;
 
 
-    @JsonGetter("movies")
+    @JsonGetter("characters")
     public List<String> characters() {
         if(characters != null) {
             return characters.stream()

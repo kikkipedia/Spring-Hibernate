@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.MovieRepository;
+import se.experis.assignment3hibernate.services.MovieService;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -18,6 +18,9 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
@@ -73,6 +76,19 @@ public class MovieController {
         movieRepository.deleteById(id);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(status);
+    }
+
+    @GetMapping("/{id}/allCharacters")
+    public ResponseEntity<List<Character>> getAllCharactersInMovie(@PathVariable Long id) {
+        HttpStatus status;
+        List<Character> characters = null;
+        if (movieRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            characters = movieService.getCharactersInMovie(id);
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(characters, status);
     }
 
 }
