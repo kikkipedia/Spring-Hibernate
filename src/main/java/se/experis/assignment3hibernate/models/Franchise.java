@@ -1,7 +1,11 @@
 package se.experis.assignment3hibernate.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Franchise {
@@ -9,13 +13,28 @@ public class Franchise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     @Column(name="name")
     private String name;
-    @Column(name="description")
+
+    @Column(name="description", columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "franchise")
     List<Movie> movies;
+
+    @JsonGetter("movies")
+    public List<String> movies() {
+        if(movies != null) {
+            return movies.stream()
+                    .map(movie -> {
+                        return "/api/v1/movies/" + movie.getId();
+                    }).collect(Collectors.toList());
+        }
+        return null;
+    }
+
 
     public Long getId() {
         return id;

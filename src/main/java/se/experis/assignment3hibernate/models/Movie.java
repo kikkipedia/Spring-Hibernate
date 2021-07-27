@@ -1,7 +1,10 @@
 package se.experis.assignment3hibernate.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Movie {
@@ -25,9 +28,21 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     public List<Character> characters;
 
+    @JsonGetter("movies")
+    public List<String> characters() {
+        if(characters != null) {
+            return characters.stream()
+                    .map(character -> {
+                        return "/api/v1/characters/" + character.getId();
+                    }).collect(Collectors.toList());
+        }
+        return null;
+    }
+
     @ManyToOne
     @JoinColumn(name="franchise_id")
     public Franchise franchise;
+
 
     public Long getId() {
         return id;
