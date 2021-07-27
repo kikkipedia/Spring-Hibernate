@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Franchise;
 import se.experis.assignment3hibernate.repositories.FranchiseRepository;
 
@@ -49,14 +50,28 @@ public class FranchiseController {
     @PutMapping("/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         HttpStatus status;
-        Franchise returnFranchise = new Franchise();
-        if(!id.equals(franchise.getId())){
+        Franchise returnFranchise = franchiseRepository.findById(id).get();
+        if(returnFranchise == null){
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnFranchise, status);
         }
+        franchise.setId(id);
         returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Franchise> deleteFranchiseById(@PathVariable Long id) {
+        HttpStatus status;
+        Franchise returnFranchise = franchiseRepository.findById(id).get();
+        if(returnFranchise == null){
+            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(returnFranchise, status);
+        }
+        franchiseRepository.deleteById(id);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(status);
     }
 
 }

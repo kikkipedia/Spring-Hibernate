@@ -49,16 +49,28 @@ public class CharacterController {
     @PutMapping("/{id}")
     public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character) {
         HttpStatus status;
-        Character returnCharacter = new Character();
-        character.setId(id); // We have to
+        Character returnCharacter = characterRepository.findById(id).get();
 
-        if(!id.equals(character.getId())){
-            status = HttpStatus.BAD_REQUEST;
+        if(returnCharacter == null){
+            status = HttpStatus.NOT_FOUND;
             return new ResponseEntity<>(returnCharacter, status);
         }
+        character.setId(id);
         returnCharacter = characterRepository.save(character);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnCharacter, status);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Character> deleteCharacterById(@PathVariable Long id) {
+        HttpStatus status;
+        Character returnCharacter = characterRepository.findById(id).get();
+        if(returnCharacter == null){
+            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(returnCharacter, status);
+        }
+        characterRepository.deleteById(id);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(status);
+    }
 }

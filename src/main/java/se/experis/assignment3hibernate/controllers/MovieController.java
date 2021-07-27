@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.MovieRepository;
 
@@ -50,14 +51,28 @@ public class MovieController {
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         HttpStatus status;
-        Movie returnMovie = new Movie();
-        if(!id.equals(movie.getId())){
+        Movie returnMovie = movieRepository.findById(id).get();
+        if(returnMovie == null){
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnMovie, status);
         }
+        movie.setId(id);
         returnMovie = movieRepository.save(movie);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Movie> deleteMovieById(@PathVariable Long id) {
+        HttpStatus status;
+        Movie returnMovie = movieRepository.findById(id).get();
+        if(returnMovie == null){
+            status = HttpStatus.NOT_FOUND;
+            return new ResponseEntity<>(returnMovie, status);
+        }
+        movieRepository.deleteById(id);
+        status = HttpStatus.NO_CONTENT;
+        return new ResponseEntity<>(status);
     }
 
 }
