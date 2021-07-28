@@ -36,24 +36,4 @@ public class FranchiseService {
         }
         return characters;
     }
-
-    public Franchise updateFranchiseWithMovies(Long id, ArrayList<Long> movieIds) {
-        ArrayList<Movie> movies = new ArrayList<>();
-        Franchise franchise = franchiseRepository.findById(id).get();
-
-        for (int i = 0; i < movieIds.size(); i++) {
-
-            long movieId = movieIds.get(i);
-
-            if (movieRepository.existsById(movieId)) {
-                Movie movie = movieRepository.findById(movieId).get();
-                movies.add(movie);
-            } else {
-                System.out.println("Movie with movieID: " + movieId + " doesn't exist.");
-            }
-        }
-
-        franchise.setMovies(movies);
-        return franchise;
-    }
 }

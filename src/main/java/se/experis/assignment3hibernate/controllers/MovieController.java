@@ -70,7 +70,7 @@ public class MovieController {
     @PutMapping("/{id}/characters")
     public ResponseEntity<Movie> updateMovieCharacters(@PathVariable Long id, @RequestBody ArrayList<Long> characterIds) {
         HttpStatus status;
-        Movie movie = null;
+        Movie movie = new Movie();
 
         if (movieRepository.existsById(id)) {
             movie = movieService.updateMovieWithCharacters(id, characterIds);

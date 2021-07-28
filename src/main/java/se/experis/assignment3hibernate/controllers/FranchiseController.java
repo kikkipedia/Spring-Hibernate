@@ -70,10 +70,10 @@ public class FranchiseController {
     @PutMapping("/{id}/movies")
     public ResponseEntity<Franchise> updateFranchiseMovies(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
-        Franchise franchise = null;
+        Franchise franchise = new Franchise();
 
         if (franchiseRepository.existsById(id)) {
-            franchise = franchiseService.updateFranchiseWithMovies(id, movieIds);
+            /*franchise = franchiseService.updateFranchiseWithMovies(id, movieIds);*/
             status = HttpStatus.OK;
         } else {
             status = HttpStatus.NOT_FOUND;
