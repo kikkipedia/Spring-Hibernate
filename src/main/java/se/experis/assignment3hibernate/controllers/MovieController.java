@@ -53,6 +53,7 @@ public class MovieController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        // Refactor with existsbyid
         HttpStatus status;
         Movie returnMovie = movieRepository.findById(id).get();
         if(returnMovie == null){
@@ -64,6 +65,25 @@ public class MovieController {
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);
     }
+
+    // Work in progress
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovieWithCharacters(@PathVariable Long id, @RequestBody int[] characterIds) {
+        HttpStatus status;
+        Movie movie = new Movie();
+        if (movieRepository.existsById(id)) {
+            status = HttpStatus.OK;
+            movie = movieRepository.findById(id).get();
+            // We want update the movies characters with ids in intArray.
+            for (int i = 0; i < characterIds.length; i++) {
+            }
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return null;
+    }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovieById(@PathVariable Long id) {
