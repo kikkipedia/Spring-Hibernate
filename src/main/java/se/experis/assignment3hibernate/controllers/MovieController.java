@@ -9,6 +9,7 @@ import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.MovieRepository;
 import se.experis.assignment3hibernate.services.MovieService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -66,26 +67,13 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
-    // Added for testing, works when using this class.
-    public static class CharacterId {
-        public Long[] getCharacterIds() {
-            return characterIds;
-        }
-
-        public void setCharacterIds(Long[] characterIds) {
-            this.characterIds = characterIds;
-        }
-
-        private Long[] characterIds;
-    }
-
-    // Work in progress
     @PutMapping("/{id}/characters")
-    public ResponseEntity<Movie> updateMovieCharacters(@PathVariable Long id, @RequestBody CharacterId characterIds) {
+    public ResponseEntity<Movie> updateMovieCharacters(@PathVariable Long id, @RequestBody ArrayList<Long> characterIds) {
         HttpStatus status;
         Movie movie = null;
+
         if (movieRepository.existsById(id)) {
-            movie = movieService.updateMovieWithCharacters(id, characterIds.getCharacterIds());
+            movie = movieService.updateMovieWithCharacters(id, characterIds);
             status = HttpStatus.OK;
         } else {
             status = HttpStatus.NOT_FOUND;
@@ -94,8 +82,6 @@ public class MovieController {
         movie = movieRepository.save(movie);
         return new ResponseEntity<>(movie, status);
     }
-
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovieById(@PathVariable Long id) {

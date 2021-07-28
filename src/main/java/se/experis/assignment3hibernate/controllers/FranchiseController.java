@@ -10,6 +10,7 @@ import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.FranchiseRepository;
 import se.experis.assignment3hibernate.services.FranchiseService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -64,6 +65,22 @@ public class FranchiseController {
         returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);
+    }
+
+    @PutMapping("/{id}/movies")
+    public ResponseEntity<Franchise> updateFranchiseMovies(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
+        HttpStatus status;
+        Franchise franchise = null;
+
+        if (franchiseRepository.existsById(id)) {
+            franchise = franchiseService.updateFranchiseWithMovies(id, movieIds);
+            status = HttpStatus.OK;
+        } else {
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        franchise = franchiseRepository.save(franchise);
+        return new ResponseEntity<>(franchise, status);
     }
 
     @DeleteMapping("/{id}")

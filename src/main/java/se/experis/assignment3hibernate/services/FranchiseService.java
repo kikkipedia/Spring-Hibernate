@@ -6,6 +6,7 @@ import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Franchise;
 import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.FranchiseRepository;
+import se.experis.assignment3hibernate.repositories.MovieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.List;
 public class FranchiseService {
     @Autowired
     private FranchiseRepository franchiseRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     public List<Movie> getAllMoviesInFranchise(Long id) {
         Franchise franchise = franchiseRepository.findById(id).get();
@@ -31,5 +35,25 @@ public class FranchiseService {
             }
         }
         return characters;
+    }
+
+    public Franchise updateFranchiseWithMovies(Long id, ArrayList<Long> movieIds) {
+        ArrayList<Movie> movies = new ArrayList<>();
+        Franchise franchise = franchiseRepository.findById(id).get();
+
+        for (int i = 0; i < movieIds.size(); i++) {
+
+            long movieId = movieIds.get(i);
+
+            if (movieRepository.existsById(movieId)) {
+                Movie movie = movieRepository.findById(movieId).get();
+                movies.add(movie);
+            } else {
+                System.out.println("Movie with movieID: " + movieId + " doesn't exist.");
+            }
+        }
+
+        franchise.setMovies(movies);
+        return franchise;
     }
 }

@@ -22,25 +22,24 @@ public class MovieService {
         return movieRepository.getById(id).getCharacters();
     }
 
-    public Movie updateMovieWithCharacters(Long id, Long[] characterIds) {
-
-        Movie movie = new Movie();
+    public Movie updateMovieWithCharacters(Long id, ArrayList<Long> characterIds) {
         ArrayList<Character> characters = new ArrayList<>();
+        Movie movie = movieRepository.findById(id).get();
 
-        movie = movieRepository.findById(id).get();
-        // We want update the movies characters with ids in intArray.
-        for (int i = 0; i < characterIds.length; i++) {
-            if (characterRepository.existsById(characterIds[i])) {
-                Character character = characterRepository.findById(characterIds[i]).get();
+        for (int i = 0; i < characterIds.size(); i++) {
+
+            long characterId = characterIds.get(i);
+
+            if (characterRepository.existsById(characterId)) {
+                Character character = characterRepository.findById(characterId).get();
                 characters.add(character);
             } else {
-                System.out.println("Character with characterID: " + characterIds[i] + " doesn't exist.");
+                System.out.println("Character with characterID: " + characterId + " doesn't exist.");
             }
         }
 
         movie.setCharacters(characters);
         return movie;
-
     }
 
 }
