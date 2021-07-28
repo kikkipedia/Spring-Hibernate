@@ -42,4 +42,12 @@ public class MovieService {
         return movie;
     }
 
+    public Movie updateFranchise(Long id, ArrayList<Long> movieIds) {
+        Movie movie = new Movie();
+
+        for (Long i = 0; i < movieIds.size(); i++) {
+            movie = movieRepository.findById(movieIds.get()).get();
+        }
+
+    }
 }
