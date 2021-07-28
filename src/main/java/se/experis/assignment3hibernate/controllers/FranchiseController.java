@@ -61,7 +61,7 @@ public class FranchiseController {
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnFranchise, status);
         }
-        franchise.setId(id);
+//        franchise.setId(id);
         returnFranchise = franchiseRepository.save(franchise);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnFranchise, status);

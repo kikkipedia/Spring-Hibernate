@@ -61,7 +61,13 @@ public class MovieController {
             status = HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(returnMovie, status);
         }
-        movie.setId(id);
+
+        // Såhär?
+        returnMovie.setTitle(movie.getTitle());
+
+
+        // Eller såhär?
+//        movie.setId(id);
         returnMovie = movieRepository.save(movie);
         status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(returnMovie, status);

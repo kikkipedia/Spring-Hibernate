@@ -49,16 +49,39 @@ public class CharacterController {
     @PutMapping("/{id}")
     public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character) {
         HttpStatus status;
-        Character returnCharacter = characterRepository.findById(id).get();
+        Character foundCharacter = null;
 
-        if(returnCharacter == null){
+        if (characterRepository.existsById(id)) {
+            foundCharacter = characterRepository.findById(id).get();
+
+            String characterFullName = character.getFullName();
+            String characterAlias = character.getAlias();
+            String characterGender = character.getGender();
+            String characterPictureURL = character.getPictureURL();
+
+            if (!(characterFullName == null || characterFullName.isEmpty())){
+                foundCharacter.setFullName(characterFullName);
+            }
+
+            if (!(characterAlias == null || characterAlias.isEmpty())){
+                foundCharacter.setAlias(characterAlias);
+            }
+
+            if (!(characterGender == null || characterGender.isEmpty())){
+                foundCharacter.setGender(characterGender);
+            }
+
+            if (!(characterPictureURL == null || characterPictureURL.isEmpty())){
+                foundCharacter.setPictureURL(characterPictureURL);
+            }
+
+            status = HttpStatus.OK;
+            characterRepository.save(foundCharacter);
+        } else {
             status = HttpStatus.NOT_FOUND;
-            return new ResponseEntity<>(returnCharacter, status);
         }
-        character.setId(id);
-        returnCharacter = characterRepository.save(character);
-        status = HttpStatus.NO_CONTENT;
-        return new ResponseEntity<>(returnCharacter, status);
+
+        return new ResponseEntity<>(foundCharacter, status);
     }
 
     @DeleteMapping("/{id}")
