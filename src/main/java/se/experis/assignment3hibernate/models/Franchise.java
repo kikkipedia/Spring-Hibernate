@@ -21,7 +21,7 @@ public class Franchise {
     @Column(name="description", columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "franchise")
+    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
     List<Movie> movies;
 
     @JsonGetter("movies")
