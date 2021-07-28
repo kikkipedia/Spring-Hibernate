@@ -56,21 +56,41 @@ public class FranchiseController {
     @PutMapping("/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         HttpStatus status;
-        Franchise returnFranchise = franchiseRepository.findById(id).get();
-        if(returnFranchise == null){
-            status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnFranchise, status);
+        Franchise foundFranchise = null;
+
+        if (franchiseRepository.existsById(id)) {
+            foundFranchise = franchiseRepository.findById(id).get();
+
+            String franchiseName = franchise.getName();
+            String franchiseDescription = franchise.getDescription();
+            List franchiseMovies = franchise.getMovies();
+
+            if (!(franchiseName == null || franchiseName.isEmpty())){
+                foundFranchise.setName(franchiseName);
+            }
+
+            if (!(franchiseDescription == null || franchiseDescription.isEmpty())){
+                foundFranchise.setDescription(franchiseDescription);
+            }
+
+            if (!(franchiseMovies == null || franchiseMovies.isEmpty())){
+                foundFranchise.setMovies(franchiseMovies);
+            }
+
+            status = HttpStatus.OK;
+            franchiseRepository.save(foundFranchise);
+        } else {
+            status = HttpStatus.NOT_FOUND;
         }
-//        franchise.setId(id);
-        returnFranchise = franchiseRepository.save(franchise);
-        status = HttpStatus.NO_CONTENT;
-        return new ResponseEntity<>(returnFranchise, status);
+
+        return new ResponseEntity<>(foundFranchise, status);
     }
 
     @PutMapping("/{id}/movies")
     public ResponseEntity<Franchise> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
         Franchise franchise = new Franchise();
+
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
             franchise = franchiseService.updateFranchise(id, movieIds);
