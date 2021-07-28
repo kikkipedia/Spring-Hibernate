@@ -54,23 +54,50 @@ public class MovieController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-        // Refactor with existsbyid
         HttpStatus status;
-        Movie returnMovie = movieRepository.findById(id).get();
-        if(returnMovie == null){
-            status = HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(returnMovie, status);
+        Movie foundMovie = null;
+
+        if (movieRepository.existsById(id)) {
+            foundMovie = movieRepository.findById(id).get();
+
+            String movieDirector = movie.getDirector();
+            String movieGenre = movie.getGenre();
+            String moviePictureURL = movie.getPictureURL();
+            String movieReleaseYear = movie.getReleaseYear();
+            String movieTitle = movie.getTitle();
+            String movieTrailerURL = movie.getTrailerURL();
+
+            if (!(movieDirector == null || movieDirector.isEmpty())){
+                foundMovie.setDirector(movieDirector);
+            }
+
+            if (!(movieGenre == null || movieGenre.isEmpty())){
+                foundMovie.setGenre(movieGenre);
+            }
+
+            if (!(moviePictureURL == null || moviePictureURL.isEmpty())){
+                foundMovie.setPictureURL(moviePictureURL);
+            }
+
+            if (!(movieReleaseYear == null || movieReleaseYear.isEmpty())){
+                foundMovie.setReleaseYear(movieReleaseYear);
+            }
+
+            if (!(movieTitle == null || movieTitle.isEmpty())){
+                foundMovie.setTitle(movieTitle);
+            }
+
+            if (!(movieTrailerURL == null || movieTrailerURL.isEmpty())){
+                foundMovie.setTrailerURL(movieTrailerURL);
+            }
+
+            status = HttpStatus.OK;
+            movieRepository.save(foundMovie);
+        } else {
+            status = HttpStatus.NOT_FOUND;
         }
 
-        // Såhär?
-        returnMovie.setTitle(movie.getTitle());
-
-
-        // Eller såhär?
-//        movie.setId(id);
-        returnMovie = movieRepository.save(movie);
-        status = HttpStatus.NO_CONTENT;
-        return new ResponseEntity<>(returnMovie, status);
+        return new ResponseEntity<>(foundMovie, status);
     }
 
     @PutMapping("/{id}/characters")
