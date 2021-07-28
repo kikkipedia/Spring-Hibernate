@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.experis.assignment3hibernate.models.Character;
-import se.experis.assignment3hibernate.models.Franchise;
 import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.MovieRepository;
 import se.experis.assignment3hibernate.services.MovieService;
@@ -110,19 +109,6 @@ public class MovieController {
         return new ResponseEntity<>(characters, status);
     }
 
-    @PutMapping("/{id}/franchise")
-    public ResponseEntity<Movie> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
-        HttpStatus status;
-        Movie movie = new Movie();
-        if (movieRepository.existsById(id)) {
-            status = HttpStatus.OK;
-            movie = movieService.updateFranchise(id, movieIds);
-        } else {
-            status = HttpStatus.NOT_FOUND;
-        }
 
-        movie = movieRepository.save(movie);
-        return new ResponseEntity<>(movie, status);
-    }
 
 }

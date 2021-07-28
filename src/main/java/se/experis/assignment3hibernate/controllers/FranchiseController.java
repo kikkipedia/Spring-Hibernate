@@ -68,17 +68,16 @@ public class FranchiseController {
     }
 
     @PutMapping("/{id}/movies")
-    public ResponseEntity<Franchise> updateFranchiseMovies(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
+    public ResponseEntity<Franchise> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
         Franchise franchise = new Franchise();
-
         if (franchiseRepository.existsById(id)) {
             status = HttpStatus.OK;
+            franchise = franchiseService.updateFranchise(id, movieIds);
         } else {
             status = HttpStatus.NOT_FOUND;
         }
 
-        franchise = franchiseRepository.save(franchise);
         return new ResponseEntity<>(franchise, status);
     }
 

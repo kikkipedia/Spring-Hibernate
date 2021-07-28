@@ -36,4 +36,19 @@ public class FranchiseService {
         }
         return characters;
     }
+
+    public Franchise updateFranchise(Long id, ArrayList<Long> movieIds) {
+        Movie movie = new Movie();
+        Franchise franchise = new Franchise();
+
+        for (int i = 0; i < movieIds.size(); i++) {
+            Long movieId = movieIds.get(i);
+            movie = movieRepository.findById(movieId).get();
+            franchise = franchiseRepository.findById(id).get();
+            movie.setFranchise(franchise);
+            movieRepository.save(movie);
+        }
+
+        return franchise;
+    }
 }
