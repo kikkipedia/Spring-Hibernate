@@ -66,21 +66,33 @@ public class MovieController {
         return new ResponseEntity<>(returnMovie, status);
     }
 
+    // Added for testing, works when using this class.
+    public static class CharacterId {
+        public Long[] getCharacterIds() {
+            return characterIds;
+        }
+
+        public void setCharacterIds(Long[] characterIds) {
+            this.characterIds = characterIds;
+        }
+
+        private Long[] characterIds;
+    }
+
     // Work in progress
-    @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovieWithCharacters(@PathVariable Long id, @RequestBody int[] characterIds) {
+    @PutMapping("/{id}/characters")
+    public ResponseEntity<Movie> updateMovieCharacters(@PathVariable Long id, @RequestBody CharacterId characterIds) {
         HttpStatus status;
-        Movie movie = new Movie();
+        Movie movie = null;
         if (movieRepository.existsById(id)) {
+            movie = movieService.updateMovieWithCharacters(id, characterIds.getCharacterIds());
             status = HttpStatus.OK;
-            movie = movieRepository.findById(id).get();
-            // We want update the movies characters with ids in intArray.
-            for (int i = 0; i < characterIds.length; i++) {
-            }
         } else {
             status = HttpStatus.NOT_FOUND;
         }
-        return null;
+
+        movie = movieRepository.save(movie);
+        return new ResponseEntity<>(movie, status);
     }
 
 
