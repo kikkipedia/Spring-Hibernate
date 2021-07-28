@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import se.experis.assignment3hibernate.models.Character;
 import se.experis.assignment3hibernate.models.Movie;
 import se.experis.assignment3hibernate.repositories.CharacterRepository;
-import se.experis.assignment3hibernate.repositories.FranchiseRepository;
 import se.experis.assignment3hibernate.repositories.MovieRepository;
 
 import java.util.ArrayList;
@@ -18,9 +17,6 @@ public class MovieService {
 
     @Autowired
     private CharacterRepository characterRepository;
-
-    @Autowired
-    private FranchiseRepository franchiseRepository;
 
     public List<Character> getCharactersInMovie(Long id) {
         return movieRepository.getById(id).getCharacters();

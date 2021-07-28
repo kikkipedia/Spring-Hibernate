@@ -63,7 +63,6 @@ public class FranchiseController {
 
             String franchiseName = franchise.getName();
             String franchiseDescription = franchise.getDescription();
-            List franchiseMovies = franchise.getMovies();
 
             if (!(franchiseName == null || franchiseName.isEmpty())){
                 foundFranchise.setName(franchiseName);
@@ -71,10 +70,6 @@ public class FranchiseController {
 
             if (!(franchiseDescription == null || franchiseDescription.isEmpty())){
                 foundFranchise.setDescription(franchiseDescription);
-            }
-
-            if (!(franchiseMovies == null || franchiseMovies.isEmpty())){
-                foundFranchise.setMovies(franchiseMovies);
             }
 
             status = HttpStatus.OK;

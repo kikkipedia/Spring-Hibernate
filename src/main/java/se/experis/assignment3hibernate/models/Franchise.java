@@ -64,7 +64,7 @@ public class Franchise {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
+   /* public void setMovies(List<Movie> movies) {
         this.movies = movies;
-    }
+    }*/
 }
