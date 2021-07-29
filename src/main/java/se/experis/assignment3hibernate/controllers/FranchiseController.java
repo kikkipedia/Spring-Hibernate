@@ -87,7 +87,7 @@ public class FranchiseController {
         Franchise franchise = new Franchise();
 
         if (franchiseRepository.existsById(id)) {
-            status = HttpStatus.OK;
+            status = HttpStatus.NO_CONTENT;
             franchise = franchiseService.updateFranchise(id, movieIds);
         } else {
             status = HttpStatus.NOT_FOUND;

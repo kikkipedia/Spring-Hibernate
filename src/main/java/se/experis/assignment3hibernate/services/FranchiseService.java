@@ -38,15 +38,24 @@ public class FranchiseService {
     }
 
     public Franchise updateFranchise(Long id, ArrayList<Long> movieIds) {
-        Movie movie = new Movie();
-        Franchise franchise = new Franchise();
+        Franchise franchise = franchiseRepository.findById(id).get();
+
+        for (Movie movie: franchise.getMovies()) {
+            movie.setFranchise(null);
+            movieRepository.save(movie);
+        }
 
         for (int i = 0; i < movieIds.size(); i++) {
-            Long movieId = movieIds.get(i);
-            movie = movieRepository.findById(movieId).get();
-            franchise = franchiseRepository.findById(id).get();
-            movie.setFranchise(franchise);
-            movieRepository.save(movie);
+
+            long movieId = movieIds.get(i);
+
+            if (movieRepository.existsById(movieId)) {
+                Movie movie = movieRepository.findById(movieId).get();
+                movie.setFranchise(franchise);
+                movieRepository.save(movie);
+            } else {
+                System.out.println("Movie with movieID: " + movieId + " doesn't exist.");
+            }
         }
 
         return franchise;
