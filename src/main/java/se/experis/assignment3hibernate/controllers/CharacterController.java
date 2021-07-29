@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/characters")
+@RequestMapping("/api/v1/character")
 public class CharacterController {
 
     @Autowired

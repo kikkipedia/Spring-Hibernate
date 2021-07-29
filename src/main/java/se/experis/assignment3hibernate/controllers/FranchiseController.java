@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/franchises")
+@RequestMapping("/api/v1/franchise")
 public class FranchiseController {
 
     @Autowired
@@ -81,7 +81,7 @@ public class FranchiseController {
         return new ResponseEntity<>(foundFranchise, status);
     }
 
-    @PutMapping("/{id}/movies")
+    @PutMapping("/{id}/movie")
     public ResponseEntity<Franchise> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
         Franchise franchise = new Franchise();
