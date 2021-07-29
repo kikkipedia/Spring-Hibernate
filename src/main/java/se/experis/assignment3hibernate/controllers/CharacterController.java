@@ -124,16 +124,28 @@ public class CharacterController {
         return new ResponseEntity<>(foundCharacter, status);
     }
 
+    @Operation(summary = "Delete character by Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Deleted character with Id.",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Character.class)) }),
+            @ApiResponse(responseCode = "404", description = "Character not found.",
+                    content = @Content)
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Character> deleteCharacterById(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteCharacterById(
+            @Parameter(description = "Id of character to delete.")
+            @PathVariable Long id) {
         HttpStatus status;
-        Character returnCharacter = characterRepository.findById(id).get();
-        if(returnCharacter == null){
+
+        if (characterRepository.existsById(id)) {
+            status = HttpStatus.NO_CONTENT;
+            characterRepository.deleteById(id);
+        } else {
             status = HttpStatus.NOT_FOUND;
-            return new ResponseEntity<>(returnCharacter, status);
+            return new ResponseEntity<>(status);
         }
-        characterRepository.deleteById(id);
-        status = HttpStatus.NO_CONTENT;
+
         return new ResponseEntity<>(status);
     }
 }

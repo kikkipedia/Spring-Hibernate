@@ -44,6 +44,7 @@ public class Movie {
      * Many-To-Many-relation: One movie can have several characters and one character can be in many movies.
      * Movie has a join column character_movie that stores the id value and has a foreign key to the Character entity
      */
+    @Hidden
     @ManyToMany
     @JoinTable(
             name = "character_movie",
@@ -69,6 +70,7 @@ public class Movie {
     /**
      * Many-To-One relationship with Franchise. Many Movies can have the same Franchise
      */
+    @Hidden
     @ManyToOne
     @JoinColumn(name="franchise_id")
     public Franchise franchise;

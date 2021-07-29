@@ -31,6 +31,7 @@ public class Franchise {
      * to one Franchise.
      * CascadeType.ALL replicates all actions to the Movie relation
      */
+    @Hidden
     @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
     List<Movie> movies;
 
