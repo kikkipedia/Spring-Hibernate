@@ -43,7 +43,7 @@ public class Franchise {
         if(movies != null) {
             return movies.stream()
                     .map(movie -> {
-                        return "/api/v1/movies/" + movie.getId();
+                        return "/api/v1/movie/" + movie.getId();
                     }).collect(Collectors.toList());
         }
         return null;

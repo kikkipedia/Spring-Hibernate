@@ -23,6 +23,10 @@ public class CharacterController {
     @Autowired
     private CharacterRepository characterRepository;
 
+    /**
+     * GET all Character objects in database
+     * @return - Character objects
+     */
     @Operation(summary = "Get all characters from character table.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Displaying all characters.",
@@ -36,7 +40,12 @@ public class CharacterController {
         return new ResponseEntity<>(characters, status);
     }
 
-
+    /**
+     * GET one specified Character object.
+     * @param id - identifier of Character object that we want to fetch.
+     *           Checks if desired object is to be found in the database.
+     * @return Character object
+     */
     @Operation(summary = "Get character by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found character by Id.",
@@ -61,6 +70,11 @@ public class CharacterController {
         return new ResponseEntity<>(character, status);
     }
 
+    /**
+     * POST a new Character object.
+     * @param character - Character object to be added in database
+     * @return saved Character object
+     */
     @Operation(summary = "Add a new character.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Character created.",
@@ -75,6 +89,13 @@ public class CharacterController {
         return new ResponseEntity<>(character, status);
     }
 
+    /**
+     * UPDATE Character object in database. Checks if values in the request body is empty, and
+     * if not updates Character with new values.
+     * @param id - Identifier of Character object to be updated
+     * @param character - Character object from the request body
+     * @return updated Character object
+     */
     @Operation(summary = "Updating specified character with new information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found character by Id. Updated character with new information.",
@@ -132,6 +153,11 @@ public class CharacterController {
             @ApiResponse(responseCode = "404", description = "Character not found.",
                     content = @Content)
     })
+    /**
+     * DELETE Character object
+     * @param id - Character identifier.
+     * @return HttpStatus
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteCharacterById(
             @Parameter(description = "Id of character to delete.")

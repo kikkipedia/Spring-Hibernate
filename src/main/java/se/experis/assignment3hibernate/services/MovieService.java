@@ -10,6 +10,9 @@ import se.experis.assignment3hibernate.repositories.MovieRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Business logic for Movie controller
+ */
 @Service
 public class MovieService {
     @Autowired

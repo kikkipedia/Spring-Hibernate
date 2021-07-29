@@ -29,6 +29,10 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    /**
+     * GET all Movie objects in database
+     * @return - Movie objects
+     */
     @Operation(summary = "Get all movies from movie table.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Displaying all movies.",
@@ -42,6 +46,12 @@ public class MovieController {
         return new ResponseEntity<>(movies, status);
     }
 
+    /**
+     * GET one specified Movie object.
+     * @param id - identifier of Movie object that we want to fetch.
+     *           Checks if desired object is to be found in the database.
+     * @return Movie object
+     */
     @Operation(summary = "Get movie by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id.",
@@ -67,6 +77,11 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * POST a new Movie object.
+     * @param movie - Movie object to be added in database
+     * @return saved Movie object
+     */
     @Operation(summary = "Add a new movie.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Movie created.",
@@ -82,6 +97,13 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * UPDATE Movie object in database. Checks if values in the request body is empty, and
+     * if not updates Movie with new values.
+     * @param id - Identifier of Movie object to be updated
+     * @param movie - Movie object from the request body
+     * @return updated Movie object
+     */
     @Operation(summary = "Updating specified movie with new information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id. Updated movie with new information.",
@@ -142,6 +164,12 @@ public class MovieController {
         return new ResponseEntity<>(foundMovie, status);
     }
 
+    /**
+     * UPDATE the Character(s) in Movie
+     * @param id - Movie identifier
+     * @param characterIds - Array of Character object Ids from the request body
+     * @return Movie object
+     */
     @Operation(summary = "Updating specified movie with new characters.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id. Updated Movie with new characters.",
@@ -170,6 +198,11 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * DELETE Movie object
+     * @param id - Movie identifier.
+     * @return HttpStatus
+     */
     @Operation(summary = "Delete movie by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Deleted franchise with Id.",
@@ -192,6 +225,11 @@ public class MovieController {
             return new ResponseEntity<>(status);
         }
 
+    /**
+     * GET all Characters in one Movie
+     * @param id - Movie identifier
+     * @return List of Characters
+     */
         return new ResponseEntity<>(status);
     }
 

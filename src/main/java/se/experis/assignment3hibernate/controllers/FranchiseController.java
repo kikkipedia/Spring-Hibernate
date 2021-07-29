@@ -36,6 +36,10 @@ public class FranchiseController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Franchise.class)) })
     })
+    /**
+     * GET all Franchise objects in database
+     * @return - Franchise objects
+     */
     @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
@@ -51,6 +55,12 @@ public class FranchiseController {
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
+    /**
+     * GET one specified Franchise object.
+     * @param id - identifier of Franchise object that we want to fetch.
+     *           Checks if desired object is to be found in the database.
+     * @return Franchise object
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Franchise> getFranchiseById(
             @Parameter(description = "Id of franchise to be searched.")
@@ -69,6 +79,11 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * POST a new Franchise object.
+     * @param franchise - Franchise object to be added in database
+     * @return saved Franchise object
+     */
     @Operation(summary = "Add a new franchise.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Franchise created.",
@@ -84,6 +99,13 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * UPDATE Franchise object in database. Checks if values in the request body is empty, and
+     * if not updates Franchise with new values.
+     * @param id - Franchise identifier
+     * @param franchise - Franchise object from the request body
+     * @return updated Franchise object
+     */
     @Operation(summary = "Updating specified franchise with new information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found franchise by Id. Updated franchise with new information.",
@@ -124,6 +146,12 @@ public class FranchiseController {
         return new ResponseEntity<>(foundFranchise, status);
     }
 
+    /**
+     * UPDATES Movie(s) in one Franchise objects
+     * @param id - Franchise identifier.
+     * @param movieIds - Array of Movie object Ids from the request body
+     * @return updated Franchise object
+     */
     @Operation(summary = "Updating specified franchise with new movies.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Found franchise by Id. Updated franchise with new movies.",
@@ -158,6 +186,11 @@ public class FranchiseController {
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
+    /**
+     * DELETE Franchise object
+     * @param id - Franchise identifier.
+     * @return HttpStatus
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Franchise> deleteFranchiseById(
             @Parameter(description = "Id of franchise to delete.")
@@ -182,6 +215,11 @@ public class FranchiseController {
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
+    /**
+     * GET all Movies in one Franchise
+     * @param id - Franchise identifier
+     * @return List of Movies
+     */
     @GetMapping("/{id}/allMovies")
     public ResponseEntity<List<Movie>> getAllMoviesInFranchise(
             @Parameter(description = "Id of franchise to get all movies from.")
@@ -197,6 +235,11 @@ public class FranchiseController {
         return new ResponseEntity<>(movies, status);
     }
 
+    /**
+     * GET all Character in one Franchise
+     * @param id - Franchise identifier
+     * @return List of Characters
+     */
     @Operation(summary = "Get all characters in franchise by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Characters within a franchise.",
