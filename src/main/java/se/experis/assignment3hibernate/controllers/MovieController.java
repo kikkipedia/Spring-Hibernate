@@ -23,6 +23,10 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    /**
+     * GET all Movie objects in database
+     * @return - Movie objects
+     */
     @GetMapping("/all")
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
@@ -30,6 +34,12 @@ public class MovieController {
         return new ResponseEntity<>(movies, status);
     }
 
+    /**
+     * GET one specified Movie object.
+     * @param id - identifier of Movie object that we want to fetch.
+     *           Checks if desired object is to be found in the database.
+     * @return Movie object
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
         Movie movie = new Movie();
@@ -45,6 +55,11 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * POST a new Movie object.
+     * @param movie - Movie object to be added in database
+     * @return saved Movie object
+     */
     @PostMapping("/add")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         movie = movieRepository.save(movie);
@@ -52,6 +67,13 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * UPDATE Movie object in database. Checks if values in the request body is empty, and
+     * if not updates Movie with new values.
+     * @param id - Identifier of Movie object to be updated
+     * @param movie - Movie object from the request body
+     * @return updated Movie object
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         HttpStatus status;
@@ -100,6 +122,12 @@ public class MovieController {
         return new ResponseEntity<>(foundMovie, status);
     }
 
+    /**
+     * UPDATE the Character(s) in Movie
+     * @param id - Movie identifier
+     * @param characterIds - Array of Character object Ids from the request body
+     * @return Movie object
+     */
     @PutMapping("/{id}/characters")
     public ResponseEntity<Movie> updateMovieCharacters(@PathVariable Long id, @RequestBody ArrayList<Long> characterIds) {
         HttpStatus status;
@@ -116,6 +144,11 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
+    /**
+     * DELETE Movie object
+     * @param id - Movie identifier.
+     * @return HttpStatus
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Movie> deleteMovieById(@PathVariable Long id) {
         HttpStatus status;
@@ -129,6 +162,11 @@ public class MovieController {
         return new ResponseEntity<>(status);
     }
 
+    /**
+     * GET all Characters in one Movie
+     * @param id - Movie identifier
+     * @return List of Characters
+     */
     @GetMapping("/{id}/allCharacters")
     public ResponseEntity<List<Character>> getAllCharactersInMovie(@PathVariable Long id) {
         HttpStatus status;

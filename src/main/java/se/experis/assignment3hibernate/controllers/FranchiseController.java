@@ -24,6 +24,10 @@ public class FranchiseController {
     @Autowired
     private FranchiseService franchiseService;
 
+    /**
+     * GET all Franchise objects in database
+     * @return - Franchise objects
+     */
     @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
@@ -31,6 +35,12 @@ public class FranchiseController {
         return new ResponseEntity<>(franchises, status);
     }
 
+    /**
+     * GET one specified Franchise object.
+     * @param id - identifier of Franchise object that we want to fetch.
+     *           Checks if desired object is to be found in the database.
+     * @return Franchise object
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Franchise> getFranchiseById(@PathVariable Long id) {
         Franchise franchise = new Franchise();
@@ -46,6 +56,11 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * POST a new Franchise object.
+     * @param franchise - Franchise object to be added in database
+     * @return saved Franchise object
+     */
     @PostMapping("/add")
     public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
         franchise = franchiseRepository.save(franchise);
@@ -53,6 +68,13 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * UPDATE Franchise object in database. Checks if values in the request body is empty, and
+     * if not updates Franchise with new values.
+     * @param id - Franchise identifier
+     * @param franchise - Franchise object from the request body
+     * @return updated Franchise object
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Long id, @RequestBody Franchise franchise) {
         HttpStatus status;
@@ -81,6 +103,12 @@ public class FranchiseController {
         return new ResponseEntity<>(foundFranchise, status);
     }
 
+    /**
+     * UPDATES Movie(s) in one Franchise objects
+     * @param id - Franchise identifier.
+     * @param movieIds - Array of Movie object Ids from the request body
+     * @return updated Franchise object
+     */
     @PutMapping("/{id}/movies")
     public ResponseEntity<Franchise> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
@@ -96,6 +124,11 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * DELETE Franchise object
+     * @param id - Franchise identifier.
+     * @return HttpStatus
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Franchise> deleteFranchiseById(@PathVariable Long id) {
         HttpStatus status;
@@ -109,6 +142,11 @@ public class FranchiseController {
         return new ResponseEntity<>(status);
     }
 
+    /**
+     * GET all Movies in one Franchise
+     * @param id - Franchise identifier
+     * @return List of Movies
+     */
     @GetMapping("/{id}/allMovies")
     public ResponseEntity<List<Movie>> getAllMoviesInFranchise(@PathVariable Long id) {
         HttpStatus status;
@@ -122,6 +160,11 @@ public class FranchiseController {
         return new ResponseEntity<>(movies, status);
     }
 
+    /**
+     * GET all Character in one Franchise
+     * @param id - Franchise identifier
+     * @return List of Characters
+     */
     @GetMapping("/{id}/allCharacters")
     public ResponseEntity<List<Character>> getAllCharactersInFranchise(@PathVariable Long id) {
         HttpStatus status;
