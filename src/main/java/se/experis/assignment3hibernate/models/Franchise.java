@@ -2,6 +2,7 @@ package se.experis.assignment3hibernate.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.sun.istack.NotNull;
+import io.swagger.v3.oas.annotations.Hidden;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Franchise {
 
+    @Hidden
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

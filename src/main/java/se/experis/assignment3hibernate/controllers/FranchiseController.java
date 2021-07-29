@@ -24,7 +24,7 @@ public class FranchiseController {
     @Autowired
     private FranchiseService franchiseService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Franchise>> getAllFranchises() {
         List<Franchise> franchises = franchiseRepository.findAll();
         HttpStatus status = HttpStatus.OK;
@@ -46,7 +46,7 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
         franchise = franchiseRepository.save(franchise);
         HttpStatus status = HttpStatus.CREATED;
@@ -81,7 +81,7 @@ public class FranchiseController {
         return new ResponseEntity<>(foundFranchise, status);
     }
 
-    @PutMapping("/{id}/movie")
+    @PutMapping("/{id}/movies")
     public ResponseEntity<Franchise> updateFranchiseInMovie(@PathVariable Long id, @RequestBody ArrayList<Long> movieIds) {
         HttpStatus status;
         Franchise franchise = new Franchise();

@@ -1,5 +1,11 @@
 package se.experis.assignment3hibernate.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +23,31 @@ public class CharacterController {
     @Autowired
     private CharacterRepository characterRepository;
 
-    @GetMapping
+    @Operation(summary = "Get all characters from character table.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Displaying all characters.",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Character.class)) })
+    })
+    @GetMapping("/all")
     public ResponseEntity<List<Character>> getAllCharacters() {
         List<Character> characters = characterRepository.findAll();
         HttpStatus status = HttpStatus.OK;
         return new ResponseEntity<>(characters, status);
     }
 
+
+    @Operation(summary = "Get character by Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found character by Id.",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Character.class)) }),
+            @ApiResponse(responseCode = "404", description = "Character not found.",
+                    content = @Content)
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharacterById(@PathVariable Long id) {
+    public ResponseEntity<Character> getCharacterById(@Parameter(description = "Id of character to be searched.")
+                                                          @PathVariable Long id) {
         Character character = new Character();
         HttpStatus status;
 
@@ -39,15 +61,33 @@ public class CharacterController {
         return new ResponseEntity<>(character, status);
     }
 
-    @PostMapping
-    public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
+    @Operation(summary = "Add a new character.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Character created.",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Character.class)) })
+    })
+    @PostMapping("/add")
+    public ResponseEntity<Character> addCharacter(@Parameter(description = "character to add.")
+                                                      @RequestBody Character character) {
         character = characterRepository.save(character);
         HttpStatus status = HttpStatus.CREATED;
         return new ResponseEntity<>(character, status);
     }
 
+    @Operation(summary = "Updating specified character with new information.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found character by Id. Updated character with new information.",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Character.class)) }),
+            @ApiResponse(responseCode = "404", description = "Character not found.",
+                    content = @Content)
+    })
     @PutMapping("/{id}")
-    public ResponseEntity<Character> updateCharacter(@PathVariable Long id, @RequestBody Character character) {
+    public ResponseEntity<Character> updateCharacter(@Parameter(description = "Id of character to update.")
+                                                         @PathVariable Long id,
+                                                     @Parameter(description = "character information to update with.")
+                                                         @RequestBody Character character) {
         HttpStatus status;
         Character foundCharacter = null;
 

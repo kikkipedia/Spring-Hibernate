@@ -23,7 +23,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         HttpStatus status = HttpStatus.OK;
@@ -45,7 +45,7 @@ public class MovieController {
         return new ResponseEntity<>(movie, status);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         movie = movieRepository.save(movie);
         HttpStatus status = HttpStatus.CREATED;

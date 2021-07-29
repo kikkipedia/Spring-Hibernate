@@ -1,6 +1,7 @@
 package se.experis.assignment3hibernate.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import io.swagger.v3.oas.annotations.Hidden;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Character {
 
+    @Hidden
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,9 +42,9 @@ public class Character {
         return null;
     }
 
-    public void setId(Long id) {
+    /*public void setId(Long id) {
         this.id = id;
-    }
+    }*/
 
     public Long getId() {
         return id;
