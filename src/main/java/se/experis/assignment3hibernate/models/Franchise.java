@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import io.swagger.v3.oas.annotations.Hidden;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,14 +19,24 @@ public class Franchise {
 
     @NotNull
     @Column(name="name")
+    @Size(max=255)
     private String name;
 
     @Column(name="description", columnDefinition = "TEXT")
+    @Size(max=255)
     private String description;
 
+    /**
+     * One-To-Many-relation. A Franchise can have many Movies. A Movie can only belong
+     * to one Franchise.
+     * CascadeType.ALL replicates all actions to the Movie relation
+     */
     @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
     List<Movie> movies;
 
+    /**
+     * @return a map of movie objects
+     */
     @JsonGetter("movies")
     public List<String> movies() {
         if(movies != null) {
@@ -37,14 +48,7 @@ public class Franchise {
         return null;
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-/*    public void setId(Long id) {
-        this.id = id;
-    }*/
+    public Long getId() { return id; }
 
     public String getName() {
         return name;
