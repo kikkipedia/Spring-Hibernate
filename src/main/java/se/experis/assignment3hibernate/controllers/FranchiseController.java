@@ -33,8 +33,8 @@ public class FranchiseController {
     @Operation(summary = "Get all franchises from franchise table.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Displaying all franchises.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) })
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))})
     })
     /**
      * GET all Franchise objects in database
@@ -50,8 +50,8 @@ public class FranchiseController {
     @Operation(summary = "Get franchise by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found franchise by Id.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))}),
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
@@ -73,7 +73,7 @@ public class FranchiseController {
             franchise = franchiseRepository.findById(id).get();
         } else {
             status = HttpStatus.NOT_FOUND;
-            return  new ResponseEntity<>(status);
+            return new ResponseEntity<>(status);
         }
 
         return new ResponseEntity<>(franchise, status);
@@ -81,14 +81,15 @@ public class FranchiseController {
 
     /**
      * POST a new Franchise object.
+     *
      * @param franchise - Franchise object to be added in database
      * @return saved Franchise object
      */
     @Operation(summary = "Add a new franchise.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Franchise created.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) })
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))})
     })
     @PostMapping("/add")
     public ResponseEntity<Franchise> addFranchise(
@@ -102,15 +103,16 @@ public class FranchiseController {
     /**
      * UPDATE Franchise object in database. Checks if values in the request body is empty, and
      * if not updates Franchise with new values.
-     * @param id - Franchise identifier
+     *
+     * @param id        - Franchise identifier
      * @param franchise - Franchise object from the request body
      * @return updated Franchise object
      */
     @Operation(summary = "Updating specified franchise with new information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found franchise by Id. Updated franchise with new information.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))}),
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
@@ -129,11 +131,11 @@ public class FranchiseController {
             String franchiseName = franchise.getName();
             String franchiseDescription = franchise.getDescription();
 
-            if (!(franchiseName == null || franchiseName.isEmpty())){
+            if (!(franchiseName == null || franchiseName.isEmpty())) {
                 foundFranchise.setName(franchiseName);
             }
 
-            if (!(franchiseDescription == null || franchiseDescription.isEmpty())){
+            if (!(franchiseDescription == null || franchiseDescription.isEmpty())) {
                 foundFranchise.setDescription(franchiseDescription);
             }
 
@@ -148,15 +150,16 @@ public class FranchiseController {
 
     /**
      * UPDATES Movie(s) in one Franchise objects
-     * @param id - Franchise identifier.
+     *
+     * @param id       - Franchise identifier.
      * @param movieIds - Array of Movie object Ids from the request body
      * @return updated Franchise object
      */
     @Operation(summary = "Updating specified franchise with new movies.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Found franchise by Id. Updated franchise with new movies.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))}),
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
@@ -179,6 +182,12 @@ public class FranchiseController {
         return new ResponseEntity<>(franchise, status);
     }
 
+    /**
+     * DELETE Franchise object
+     *
+     * @param id - Franchise identifier.
+     * @return HttpStatus
+     */
     @Operation(summary = "Delete franchise by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Deleted franchise with Id.",
@@ -186,11 +195,6 @@ public class FranchiseController {
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
-    /**
-     * DELETE Franchise object
-     * @param id - Franchise identifier.
-     * @return HttpStatus
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Franchise> deleteFranchiseById(
             @Parameter(description = "Id of franchise to delete.")
@@ -208,6 +212,12 @@ public class FranchiseController {
         return new ResponseEntity<>(status);
     }
 
+    /**
+     * GET all Movies in one Franchise
+     *
+     * @param id - Franchise identifier
+     * @return List of Movies
+     */
     @Operation(summary = "Get all movies in franchise by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Movies within a franchise.",
@@ -215,11 +225,6 @@ public class FranchiseController {
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
-    /**
-     * GET all Movies in one Franchise
-     * @param id - Franchise identifier
-     * @return List of Movies
-     */
     @GetMapping("/{id}/allMovies")
     public ResponseEntity<List<Movie>> getAllMoviesInFranchise(
             @Parameter(description = "Id of franchise to get all movies from.")
@@ -237,14 +242,15 @@ public class FranchiseController {
 
     /**
      * GET all Character in one Franchise
+     *
      * @param id - Franchise identifier
      * @return List of Characters
      */
     @Operation(summary = "Get all characters in franchise by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Characters within a franchise.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Franchise.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Franchise.class))}),
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })

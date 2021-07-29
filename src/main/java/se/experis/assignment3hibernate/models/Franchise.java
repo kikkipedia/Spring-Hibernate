@@ -18,12 +18,12 @@ public class Franchise {
     private Long id;
 
     @NotNull
-    @Column(name="name")
-    @Size(max=255)
+    @Column(name = "name")
+    @Size(max = 255)
     private String name;
 
-    @Column(name="description", columnDefinition = "TEXT")
-    @Size(max=255)
+    @Column(name = "description", columnDefinition = "TEXT")
+    @Size(max = 255)
     private String description;
 
     /**
@@ -40,7 +40,7 @@ public class Franchise {
      */
     @JsonGetter("movies")
     public List<String> movies() {
-        if(movies != null) {
+        if (movies != null) {
             return movies.stream()
                     .map(movie -> {
                         return "/api/v1/movie/" + movie.getId();
@@ -49,7 +49,9 @@ public class Franchise {
         return null;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

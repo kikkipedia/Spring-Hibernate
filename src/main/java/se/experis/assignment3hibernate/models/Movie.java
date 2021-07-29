@@ -16,28 +16,28 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="title")
-    @Size(max=255)
+    @Column(name = "title")
+    @Size(max = 255)
     private String title;
 
-    @Column(name="genre")
-    @Size(max=255)
+    @Column(name = "genre")
+    @Size(max = 255)
     private String genre;
 
-    @Column(name="release_year")
-    @Size(max=255)
+    @Column(name = "release_year")
+    @Size(max = 255)
     private String releaseYear;
 
-    @Column(name="director")
-    @Size(max=255)
+    @Column(name = "director")
+    @Size(max = 255)
     private String director;
 
-    @Column(name="picture_url")
-    @Size(max=255)
+    @Column(name = "picture_url")
+    @Size(max = 255)
     private String pictureURL;
 
-    @Column(name="trailer_url")
-    @Size(max=255)
+    @Column(name = "trailer_url")
+    @Size(max = 255)
     private String trailerURL;
 
     /**
@@ -48,8 +48,8 @@ public class Movie {
     @ManyToMany
     @JoinTable(
             name = "character_movie",
-            joinColumns = {@JoinColumn(name="movie_id")},
-            inverseJoinColumns = {@JoinColumn(name="character_id")}
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")}
     )
     public List<Character> characters;
 
@@ -58,7 +58,7 @@ public class Movie {
      */
     @JsonGetter("characters")
     public List<String> characters() {
-        if(characters != null) {
+        if (characters != null) {
             return characters.stream()
                     .map(character -> {
                         return "/api/v1/character/" + character.getId();
@@ -72,40 +72,74 @@ public class Movie {
      */
     @Hidden
     @ManyToOne
-    @JoinColumn(name="franchise_id")
+    @JoinColumn(name = "franchise_id")
     public Franchise franchise;
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public void setTitle(String title) { this.title = title; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public String getGenre() { return genre; }
+    public String getGenre() {
+        return genre;
+    }
 
-    public void setGenre(String genre) { this.genre = genre; }
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
-    public String getReleaseYear() { return releaseYear; }
+    public String getReleaseYear() {
+        return releaseYear;
+    }
 
-    public void setReleaseYear(String releaseYear) { this.releaseYear = releaseYear; }
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
+    }
 
-    public String getDirector() { return director; }
+    public String getDirector() {
+        return director;
+    }
 
-    public void setDirector(String director) { this.director = director; }
+    public void setDirector(String director) {
+        this.director = director;
+    }
 
-    public String getPictureURL() { return pictureURL; }
+    public String getPictureURL() {
+        return pictureURL;
+    }
 
-    public void setPictureURL(String pictureURL) { this.pictureURL = pictureURL; }
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
 
-    public String getTrailerURL() { return trailerURL; }
+    public String getTrailerURL() {
+        return trailerURL;
+    }
 
-    public void setTrailerURL(String trailerURL) { this.trailerURL = trailerURL; }
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL = trailerURL;
+    }
 
-    public List<Character> getCharacters() { return characters; }
+    public List<Character> getCharacters() {
+        return characters;
+    }
 
-    public void setCharacters(List<Character> characters) { this.characters = characters; }
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
 
-    public Franchise getFranchise() { return franchise; }
+    public Franchise getFranchise() {
+        return franchise;
+    }
 
-    public void setFranchise(Franchise franchise) { this.franchise = franchise; }
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
 }

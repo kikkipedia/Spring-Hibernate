@@ -31,13 +31,14 @@ public class MovieController {
 
     /**
      * GET all Movie objects in database
+     *
      * @return - Movie objects
      */
     @Operation(summary = "Get all movies from movie table.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Displaying all movies.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) })
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))})
     })
     @GetMapping("/all")
     public ResponseEntity<List<Movie>> getAllMovies() {
@@ -48,6 +49,7 @@ public class MovieController {
 
     /**
      * GET one specified Movie object.
+     *
      * @param id - identifier of Movie object that we want to fetch.
      *           Checks if desired object is to be found in the database.
      * @return Movie object
@@ -55,8 +57,8 @@ public class MovieController {
     @Operation(summary = "Get movie by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))}),
             @ApiResponse(responseCode = "404", description = "Movie not found.",
                     content = @Content)
     })
@@ -79,14 +81,15 @@ public class MovieController {
 
     /**
      * POST a new Movie object.
+     *
      * @param movie - Movie object to be added in database
      * @return saved Movie object
      */
     @Operation(summary = "Add a new movie.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Movie created.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) })
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))})
     })
     @PostMapping("/add")
     public ResponseEntity<Movie> addMovie(
@@ -100,15 +103,16 @@ public class MovieController {
     /**
      * UPDATE Movie object in database. Checks if values in the request body is empty, and
      * if not updates Movie with new values.
-     * @param id - Identifier of Movie object to be updated
+     *
+     * @param id    - Identifier of Movie object to be updated
      * @param movie - Movie object from the request body
      * @return updated Movie object
      */
     @Operation(summary = "Updating specified movie with new information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id. Updated movie with new information.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))}),
             @ApiResponse(responseCode = "404", description = "Movie not found.",
                     content = @Content)
     })
@@ -131,27 +135,27 @@ public class MovieController {
             String movieTitle = movie.getTitle();
             String movieTrailerURL = movie.getTrailerURL();
 
-            if (!(movieDirector == null || movieDirector.isEmpty())){
+            if (!(movieDirector == null || movieDirector.isEmpty())) {
                 foundMovie.setDirector(movieDirector);
             }
 
-            if (!(movieGenre == null || movieGenre.isEmpty())){
+            if (!(movieGenre == null || movieGenre.isEmpty())) {
                 foundMovie.setGenre(movieGenre);
             }
 
-            if (!(moviePictureURL == null || moviePictureURL.isEmpty())){
+            if (!(moviePictureURL == null || moviePictureURL.isEmpty())) {
                 foundMovie.setPictureURL(moviePictureURL);
             }
 
-            if (!(movieReleaseYear == null || movieReleaseYear.isEmpty())){
+            if (!(movieReleaseYear == null || movieReleaseYear.isEmpty())) {
                 foundMovie.setReleaseYear(movieReleaseYear);
             }
 
-            if (!(movieTitle == null || movieTitle.isEmpty())){
+            if (!(movieTitle == null || movieTitle.isEmpty())) {
                 foundMovie.setTitle(movieTitle);
             }
 
-            if (!(movieTrailerURL == null || movieTrailerURL.isEmpty())){
+            if (!(movieTrailerURL == null || movieTrailerURL.isEmpty())) {
                 foundMovie.setTrailerURL(movieTrailerURL);
             }
 
@@ -166,15 +170,16 @@ public class MovieController {
 
     /**
      * UPDATE the Character(s) in Movie
-     * @param id - Movie identifier
+     *
+     * @param id           - Movie identifier
      * @param characterIds - Array of Character object Ids from the request body
      * @return Movie object
      */
     @Operation(summary = "Updating specified movie with new characters.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found movie by Id. Updated Movie with new characters.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))}),
             @ApiResponse(responseCode = "404", description = "Movie not found.",
                     content = @Content)
     })
@@ -200,14 +205,15 @@ public class MovieController {
 
     /**
      * DELETE Movie object
+     *
      * @param id - Movie identifier.
      * @return HttpStatus
      */
     @Operation(summary = "Delete movie by Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Deleted franchise with Id.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) }),
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))}),
             @ApiResponse(responseCode = "404", description = "Franchise not found.",
                     content = @Content)
     })
@@ -225,19 +231,21 @@ public class MovieController {
             return new ResponseEntity<>(status);
         }
 
-    /**
-     * GET all Characters in one Movie
-     * @param id - Movie identifier
-     * @return List of Characters
-     */
+
         return new ResponseEntity<>(status);
     }
 
+    /**
+     * GET all Characters in one Movie
+     *
+     * @param id - Movie identifier
+     * @return List of Characters
+     */
     @Operation(summary = "Get all characters in movie by Id.")
     @ApiResponses(value = {
-                @ApiResponse(responseCode = "200", description = "Characters within a movie.",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Movie.class)) }),
+            @ApiResponse(responseCode = "200", description = "Characters within a movie.",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Movie.class))}),
             @ApiResponse(responseCode = "404", description = "Movie not found.",
                     content = @Content)
     })
@@ -255,7 +263,4 @@ public class MovieController {
         }
         return new ResponseEntity<>(characters, status);
     }
-
-
-
 }

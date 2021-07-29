@@ -21,14 +21,27 @@ public class MovieService {
     @Autowired
     private CharacterRepository characterRepository;
 
+    /**
+     * Get all Characters in a movie.
+     *
+     * @param id - Id of the movie to get all characters from.
+     * @return A List of Characters.
+     */
     public List<Character> getCharactersInMovie(Long id) {
         return movieRepository.getById(id).getCharacters();
     }
 
+    /**
+     * Update movie with characters.
+     * @param id - Id of movie to update with characters.
+     * @param characterIds - List of character Ids (Long) to add to a movies List of Characters.
+     * @return Movie containing the new characters.
+     */
     public Movie updateMovieWithCharacters(Long id, ArrayList<Long> characterIds) {
         ArrayList<Character> characters = new ArrayList<>();
         Movie movie = movieRepository.findById(id).get();
 
+        // Loop through list of character IDs and add to a list of Characters.
         for (int i = 0; i < characterIds.size(); i++) {
 
             long characterId = characterIds.get(i);
@@ -41,6 +54,7 @@ public class MovieService {
             }
         }
 
+        // Add list of characters to movie.
         movie.setCharacters(characters);
         return movie;
     }

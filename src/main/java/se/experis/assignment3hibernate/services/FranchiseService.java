@@ -22,17 +22,32 @@ public class FranchiseService {
     @Autowired
     private MovieRepository movieRepository;
 
+    /**
+     * Get all movies in a franchise.
+     *
+     * @param id - Id of the franchise to get all movies from.
+     * @return A list of movies.
+     */
     public List<Movie> getAllMoviesInFranchise(Long id) {
         Franchise franchise = franchiseRepository.findById(id).get();
         return franchise.getMovies();
     }
 
+    /**
+     * Get all Characters in a franchise.
+     *
+     * @param id - Id of the franchise to get all characters from.
+     * @return A List of Characters.
+     */
     public List<Character> getAllCharactersInFranchise(Long id) {
         ArrayList<Character> characters = new ArrayList<>();
         List<Movie> allMovies = getAllMoviesInFranchise(id);
-        for (Movie movie: allMovies) {
-            for (Character character: movie.getCharacters()) {
-                if (!characters.contains(character)){
+
+        // Loop through every movie in franchise and get the characters by saving into an
+        // arrayList of characters.
+        for (Movie movie : allMovies) {
+            for (Character character : movie.getCharacters()) {
+                if (!characters.contains(character)) {
                     characters.add(character);
                 }
             }
@@ -40,14 +55,23 @@ public class FranchiseService {
         return characters;
     }
 
+    /**
+     * Update franchise with a list of movies.
+     *
+     * @param id - Id of the franchise to update with movies.
+     * @return A franchise containing the newly added movies.
+     */
     public Franchise updateFranchise(Long id, ArrayList<Long> movieIds) {
         Franchise franchise = franchiseRepository.findById(id).get();
 
-        for (Movie movie: franchise.getMovies()) {
+        // Set franchises old movies to a franchise of null.
+        for (Movie movie : franchise.getMovies()) {
             movie.setFranchise(null);
             movieRepository.save(movie);
         }
 
+        // Loop through the movieIds and get the movie.
+        // Set the franchise of the movie to the franchise supplied (id) and save.
         for (int i = 0; i < movieIds.size(); i++) {
 
             long movieId = movieIds.get(i);

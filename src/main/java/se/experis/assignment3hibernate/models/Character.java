@@ -16,19 +16,19 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="full_name")
-    @Size(max=255)
+    @Column(name = "full_name")
+    @Size(max = 255)
     private String fullName;
 
-    @Column(name="alias")
-    @Size(max=255)
+    @Column(name = "alias")
+    @Size(max = 255)
     private String alias;
 
-    @Column(name="gender")
-    @Size(max=255)
+    @Column(name = "gender")
+    @Size(max = 255)
     private String gender;
 
-    @Column(name="picture_url")
+    @Column(name = "picture_url")
     private String pictureURL;
 
     /**
@@ -39,8 +39,8 @@ public class Character {
     @ManyToMany
     @JoinTable(
             name = "character_movie",
-            joinColumns = {@JoinColumn(name="character_id")},
-            inverseJoinColumns = {@JoinColumn(name="movie_id")}
+            joinColumns = {@JoinColumn(name = "character_id")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
     )
     public List<Movie> movies;
 
@@ -49,7 +49,7 @@ public class Character {
      */
     @JsonGetter("movies")
     public List<String> movies() {
-        if(movies != null) {
+        if (movies != null) {
             return movies.stream()
                     .map(movie -> {
                         return "/api/v1/movie/" + movie.getId();
