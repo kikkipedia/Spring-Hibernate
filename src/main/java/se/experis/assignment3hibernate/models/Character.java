@@ -3,6 +3,7 @@ package se.experis.assignment3hibernate.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,15 +13,27 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name="full_name")
+    @Size(max=255)
     private String fullName;
+
     @Column(name="alias")
+    @Size(max=255)
     private String alias;
+
     @Column(name="gender")
+    @Size(max=255)
     private String gender;
+
     @Column(name="picture_url")
+    @Size(max=255)
     private String pictureURL;
 
+    /**
+     * Many-To-Many-relation: A character can be in several movies. One movie can have several characters.
+     * Character has a join column character_movie that stores the id value and has a foreign key to the Movie entity
+     */
     @ManyToMany
     @JoinTable(
             name = "character_movie",
@@ -29,6 +42,9 @@ public class Character {
     )
     public List<Movie> movies;
 
+    /**
+     * @return a map of movie objects
+     */
     @JsonGetter("movies")
     public List<String> movies() {
         if(movies != null) {
@@ -38,10 +54,6 @@ public class Character {
                     }).collect(Collectors.toList());
         }
         return null;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
@@ -72,9 +84,7 @@ public class Character {
         this.gender = gender;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
-    }
+    public String getPictureURL() { return pictureURL; }
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
