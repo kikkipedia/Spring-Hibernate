@@ -5,6 +5,10 @@ Creates a PostgreSQL database and expose it through a RESTful API using Hibernat
 
 A datastore and interface to store and manipulate movie characters, movies they appear in, and the franchises these movies belong to.
 
+### Documentation
+
+[Entity relation diagram](/Entity_Relationship_Diagram.pdf)
+
 [Swagger documentation](https://assignment-3-hibernate-heroku.herokuapp.com/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config)
 
 ## Authors
