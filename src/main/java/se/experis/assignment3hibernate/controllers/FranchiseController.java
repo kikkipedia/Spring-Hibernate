@@ -202,6 +202,7 @@ public class FranchiseController {
         HttpStatus status;
 
         if (franchiseRepository.existsById(id)) {
+            franchiseService.setFranchiseIdInMoviesToNull(franchiseRepository.findById(id).get());
             franchiseRepository.deleteById(id);
             status = HttpStatus.NO_CONTENT;
         } else {

@@ -64,11 +64,12 @@ public class FranchiseService {
     public Franchise updateFranchise(Long id, ArrayList<Long> movieIds) {
         Franchise franchise = franchiseRepository.findById(id).get();
 
-        // Set franchises old movies to a franchise of null.
-        for (Movie movie : franchise.getMovies()) {
-            movie.setFranchise(null);
-            movieRepository.save(movie);
-        }
+        // Set FranchiseId of movies to null.
+        setFranchiseIdInMoviesToNull(franchise);
+//        for (Movie movie : franchise.getMovies()) {
+//            movie.setFranchise(null);
+//            movieRepository.save(movie);
+//        }
 
         // Loop through the movieIds and get the movie.
         // Set the franchise of the movie to the franchise supplied (id) and save.
@@ -86,5 +87,21 @@ public class FranchiseService {
         }
 
         return franchise;
+    }
+
+
+    /**
+     * Set franchiseId to null for every movie in franchise.
+     *
+     * @param franchise - The franchise to get all movies from.
+     */
+    public void setFranchiseIdInMoviesToNull(Franchise franchise) {
+
+        List<Movie> movies = franchise.getMovies();
+
+        for (Movie movie: movies) {
+            movie.setFranchise(null);
+            movieRepository.save(movie);
+        }
     }
 }

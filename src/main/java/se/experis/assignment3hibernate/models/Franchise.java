@@ -29,10 +29,9 @@ public class Franchise {
     /**
      * One-To-Many-relation. A Franchise can have many Movies. A Movie can only belong
      * to one Franchise.
-     * CascadeType.ALL replicates all actions to the Movie relation
      */
     @Hidden
-    @OneToMany(mappedBy = "franchise", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "franchise")
     List<Movie> movies;
 
     /**
@@ -56,6 +55,8 @@ public class Franchise {
     public String getName() {
         return name;
     }
+
+
 
     public void setName(String name) {
         this.name = name;
