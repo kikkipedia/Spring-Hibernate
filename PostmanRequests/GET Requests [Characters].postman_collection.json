@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "ad53786e-1a20-43d5-a0a8-62a84035f9c6",
+		"name": "GET Requests [Characters]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllCharacters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/character/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"character",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCharacterById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/character/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"character",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "33010a97-3e1c-4561-b396-7cabfe1171b6",
+		"name": "PUT Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Update Character [Anakin Skywalker][Id 1]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"Anakin Skywalker UPDATED\",\r\n    \"alias\": \"\",\r\n    \"gender\": \"Male UPDATED\",\r\n    \"pictureURL\": \"C:\\\\Pictures\\\\Anakin_Skywalker_UPDATED.png\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 3\r\n        },\r\n        {\r\n            \"id\": 4\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/character/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"character",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movie [Episode I – The Phantom Menace][Id 1]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Episode I – The Phantom Menace UPDATED\",\r\n    \"genre\": \"Sci-fi UPDATED\",\r\n    \"releaseYear\": \"\",\r\n    \"director\": \"George Lucas UPDATED\",\r\n    \"pictureURL\": \"C:\\\\Pictures\\\\Episode_I_–_The_Phantom_Menace.png\",\r\n    \"trailerURL\": \"https://www.youtube.com/watch?v=uMoSnrd7i5c\",\r\n    \"franchise\": {\r\n        \"id\": 2\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movie/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Franchise [Marvel Cinematic Universe][Id 2]",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Marvel Cinematic Universe UPDATED\",\r\n    \"description\": \"Marvel Cinematic Universe (MCU) är en amerikansk mediafranchise och ett fiktivt gemensamt universum, som är centrerat kring en filmserie av superhjältefilmer som är självständigt producerade av Marvel Studios och baserade på olika superhjältar, alla skapade och ägda av seriebolaget Marvel Comics.\",\r\n    \"movies\": [\r\n        {\"id\": 1},\r\n        {\"id\": 2}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movies With Character IDs",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    3,\r\n    4\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movie/1/characters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movie",
+						"1",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Franchise With Movie IDs Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    1,\r\n    2,\r\n    5,\r\n    3\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/2/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"2",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
