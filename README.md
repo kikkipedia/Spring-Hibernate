@@ -12,7 +12,8 @@ A datastore and interface to store and manipulate movie characters, movies they 
 [Swagger documentation](https://assignment-3-hibernate-heroku.herokuapp.com/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config)
 
 ## Postman REQUESTS
-The requests we've been using for testing can be found in the folder **PostmanRequests**
+The requests we've been using for testing can be found in the folder called:  
+**PostmanRequests**
 
 ## Authors
 
