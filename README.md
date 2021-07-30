@@ -9,7 +9,7 @@ A datastore and interface to store and manipulate movie characters, movies they 
 
 [Entity relation diagram](/Entity_Relationship_Diagram.pdf)
 
-[Swagger documentation](https://assignment-3-hibernate-heroku.herokuapp.com/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config)
+[Swagger documentation](http://assignment3-hibernate.herokuapp.com/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/)
 
 ## Postman REQUESTS
 The requests we've been using for testing can be found in the folder called:  
