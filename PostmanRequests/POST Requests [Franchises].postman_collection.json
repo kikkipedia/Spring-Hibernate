@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "cc31966b-824e-4290-a28e-ed85738d942d",
+		"name": "POST Requests [Franchises]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Franchise [Star Wars][Id 1]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Star Wars\",\r\n    \"description\": \"Star Wars is an American epic space opera multimedia franchise created by George Lucas.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Franchise [Lord of the Rings][Id 3]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lord of the Rings\",\r\n    \"description\": \"The Lord of the Rings is the saga of a group of sometimes reluctant heroes who set forth to save their world from consummate evil.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Franchise [Hunger Games][Id 4]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Hunger Games\",\r\n    \"description\": \"The Hunger Games is an annual event in which one boy and one girl aged 12–18 from each of the twelve districts surrounding the Capitol are selected by lottery to compete in a televised battle royale to the death.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Franchise [The Matrix][Id 5]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The Matrix\",\r\n    \"description\": \"The film describes a future in which reality perceived by humans is actually the Matrix, a simulated reality created by sentient Machines in order to pacify and subdue the human population while their bodies' heat and electrical activity are used as an energy source.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "6a393767-17fb-4b5d-aff7-282cd4d6b231",
+		"name": "GET Requests [Franchises]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllFranchises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFranchiseById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMoviesInFranchise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/2/allMovies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"2",
+						"allMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCharactersInFranchise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/franchise/1/allCharacters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"franchise",
+						"1",
+						"allCharacters"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

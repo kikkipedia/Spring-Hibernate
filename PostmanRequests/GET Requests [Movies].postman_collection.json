@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "11ccfad1-8ee8-45f0-ab6c-89f712fa9fe5",
+		"name": "GET Requests [Movies]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movie/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movie",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovieById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movie/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movie",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCharactersInMovie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/movie/5/allCharacters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"movie",
+						"5",
+						"allCharacters"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
